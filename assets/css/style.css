@@ -17,3 +17,8 @@
 .b10 {
    background-color: lightgray;
   }
+
+.forecast-cards {
+    background-color: darkslategrey;
+    color: whitesmoke;
+}  
