@@ -1,0 +1,28 @@
+.card {
+    margin: 0 0 20px 0;
+    border: 3px solid var(--dark);
+    border-radius: var(--border-radius);
+  }
+
+.present-weather-card, 
+.b1,
+.b2,
+.b3,
+.b4,
+.b5,
+.b6,
+.b7,
+.b8,
+.b9,
+.b10 {
+   background-color: lightgray;
+  }
+
+.forecast-cards {
+    background-color: darkslategrey;
+    color: whitesmoke;
+}  
+
+.forecast-cards p:last-child{
+    color: black;
+}
