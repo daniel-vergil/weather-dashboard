@@ -22,3 +22,7 @@
     background-color: darkslategrey;
     color: whitesmoke;
 }  
+
+.forecast-cards p:last-child{
+    color: black;
+}

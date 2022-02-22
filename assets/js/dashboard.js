@@ -1,3 +1,4 @@
+// Selector objects
 var selectors = {
     searchCityInput: document.querySelector('.search-city-input'),
     searchButton: document.querySelector('.submit-btn'),
@@ -10,13 +11,16 @@ var selectors = {
     historyButtons: document.querySelectorAll('.history-btn'),
 }
 
+// Setting the history in localStorage
 const citySearches = [];
 if (!localStorage.getItem('searches')) {
     localStorage.setItem('searches', JSON.stringify(citySearches));
 }
 
+// Calling the function to create buttons for cities in the localStorage
 historyButtons();
 
+// function to verify if the city name is not empty
 var cityInput = function (event) {
     var city = selectors.searchCityInput.value;
     if (city) {
@@ -26,6 +30,7 @@ var cityInput = function (event) {
     }
 };
 
+// function to set the city name and date as the section header
 var cityCardHeader = function (city, icon) {
     const date = new Date();
     selectors.cityWeatherIcon.src = icon;
@@ -35,7 +40,7 @@ var cityCardHeader = function (city, icon) {
     selectors.cityNameCardHeader.textContent = header;
 }
 
-
+// code block to set the date headers for weather forecasts
 for (var i = 1; i <= 5; i++) {
     var date = new Date();
     var numberOfDaysToAdd = i;
@@ -47,6 +52,7 @@ for (var i = 1; i <= 5; i++) {
     document.querySelector(selector).textContent = dateHeader;
 }
 
+// function to find the coordinates of a given city
 var findCoordinates = function (city) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/find?q=' + city + '&appid=5a0652a55a4ce0a056998aad3faa9a83';
     fetch(apiUrl)
@@ -72,6 +78,7 @@ var findCoordinates = function (city) {
         });
 };
 
+// function to add the searches to localStorage
 var historyArray = (newCity) => {
     var searchArrays = JSON.parse(localStorage.getItem('searches'));
     if (searchArrays.length < 10) {
@@ -83,6 +90,7 @@ var historyArray = (newCity) => {
     localStorage.setItem('searches', JSON.stringify(searchArrays));
 }
 
+// function to display the history city buttons
 function historyButtons() {
     var history = JSON.parse(localStorage.getItem('searches'));
     var historySize = history.length;
@@ -96,6 +104,7 @@ function historyButtons() {
     }
 }
 
+// function to get the current weather using the given coordinates
 var findWeather = function (lat, lon, city) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,daily,minutely&appid=5a0652a55a4ce0a056998aad3faa9a83&units=imperial';
     fetch(apiUrl)
@@ -144,6 +153,7 @@ var findWeather = function (lat, lon, city) {
         });
 }
 
+// function to get the 5 days weather forecast using the given coordinates 
 var getWeatherForecast = function (lat, lon) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&appid=5a0652a55a4ce0a056998aad3faa9a83&units=imperial';
     fetch(apiUrl)
@@ -196,7 +206,10 @@ var getWeatherForecast = function (lat, lon) {
         });
 }
 
+// eventListner for the search button
 selectors.searchButton.addEventListener('click', cityInput);
+
+// eventListner for the history buttons
 selectors.historyButtons.forEach(item => {
     item.addEventListener('click', function (event) {
     var historyCityName = event.target.textContent;
